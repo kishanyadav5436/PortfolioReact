@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquare, Check, Copy, AlertCircle, Sparkles, Terminal } from 'lucide-react';
+import { Mail, MapPin, Send, MessageSquare, Check, Copy, AlertCircle, Terminal } from 'lucide-react';
 import { personalDetails } from '../data/portfolioData';
 
 export default function Contact() {
@@ -31,13 +31,13 @@ export default function Contact() {
       setTimeout(() => {
         setStatus('success');
         
-        // Open mailto link as fallback backup
+        // Mailto link fallback backup
         const mailtoSubject = encodeURIComponent(formData.subject || 'Portfolio Inquiry from ' + formData.name);
         const mailtoBody = encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`);
         window.open(`mailto:${personalDetails.email}?subject=${mailtoSubject}&body=${mailtoBody}`, '_blank');
 
         setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 1000);
+      }, 800);
     } else {
       setStatus('error');
     }
@@ -52,12 +52,12 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 relative bg-grid-pattern">
       
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp Quick Action Button */}
       <a
         href={personalDetails.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat on WhatsApp"
+        aria-label="Chat directly on WhatsApp"
         className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-emerald-500 text-slate-950 shadow-2xl shadow-emerald-500/40 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
       >
         <MessageSquare className="w-6 h-6 fill-slate-950" />
@@ -77,8 +77,8 @@ export default function Contact() {
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Let's Build Something <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Great Together</span>
           </h2>
-          <p className="text-slate-400 font-sans text-base sm:text-lg">
-            Have a project, job opportunity, or AI idea? Send a message or connect directly.
+          <p className="text-slate-300 font-sans text-base sm:text-lg">
+            Have a project, position, or AI engineering opportunity? Send a message or connect directly.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export default function Contact() {
             
             <div className="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 space-y-6 shadow-xl">
               <h3 className="text-xl font-bold text-white font-heading">
-                Contact Information
+                Contact Details
               </h3>
 
               <div className="space-y-4 font-code text-xs">
@@ -101,14 +101,15 @@ export default function Contact() {
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-slate-400 text-[11px]">Direct Email</div>
+                      <div className="text-slate-300 text-[11px] font-medium">Direct Email</div>
                       <div className="text-white font-semibold text-xs sm:text-sm">{personalDetails.email}</div>
                     </div>
                   </div>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-cyan-300 hover:bg-slate-700 transition-all"
-                    title="Copy Email"
+                    className="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-cyan-300 hover:bg-slate-700 transition-all"
+                    title="Copy Email Address"
+                    aria-label="Copy Email Address"
                   >
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                   </button>
@@ -119,6 +120,7 @@ export default function Contact() {
                   href={personalDetails.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Chat on WhatsApp"
                   className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3 group hover:border-emerald-500/40 transition-all"
                 >
                   <div className="flex items-center gap-3">
@@ -126,7 +128,7 @@ export default function Contact() {
                       <MessageSquare className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-slate-400 text-[11px]">WhatsApp Chat</div>
+                      <div className="text-slate-300 text-[11px] font-medium">WhatsApp Chat</div>
                       <div className="text-white font-semibold text-xs sm:text-sm">{personalDetails.phone}</div>
                     </div>
                   </div>
@@ -139,7 +141,7 @@ export default function Contact() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-slate-400 text-[11px]">Location</div>
+                    <div className="text-slate-300 text-[11px] font-medium">Location</div>
                     <div className="text-white font-semibold text-xs sm:text-sm">{personalDetails.location}</div>
                   </div>
                 </div>
@@ -147,7 +149,7 @@ export default function Contact() {
               </div>
 
               {/* Status Box */}
-              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-code flex items-center gap-2">
+              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 font-code flex items-center gap-2 font-semibold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 <span>Response Time: Typically &lt;2 hours</span>
               </div>
@@ -160,40 +162,42 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <div className="p-8 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl relative">
               
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   
                   {/* Name */}
                   <div className="space-y-1.5">
-                    <label className="block font-code text-xs font-semibold text-slate-300">
+                    <label htmlFor="contact-name" className="block font-code text-xs font-semibold text-slate-200">
                       Your Name <span className="text-rose-400">*</span>
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       placeholder="e.g. Alex Smith"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className={`w-full px-4 py-3 rounded-xl bg-slate-950 border ${
                         errors.name ? 'border-rose-500/60' : 'border-slate-800'
-                      } text-white font-sans text-sm placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors`}
+                      } text-white font-sans text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/60 transition-colors`}
                     />
                     {errors.name && <p className="font-code text-[11px] text-rose-400">{errors.name}</p>}
                   </div>
 
                   {/* Email */}
                   <div className="space-y-1.5">
-                    <label className="block font-code text-xs font-semibold text-slate-300">
+                    <label htmlFor="contact-email" className="block font-code text-xs font-semibold text-slate-200">
                       Your Email <span className="text-rose-400">*</span>
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       placeholder="e.g. alex@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className={`w-full px-4 py-3 rounded-xl bg-slate-950 border ${
                         errors.email ? 'border-rose-500/60' : 'border-slate-800'
-                      } text-white font-sans text-sm placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors`}
+                      } text-white font-sans text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/60 transition-colors`}
                     />
                     {errors.email && <p className="font-code text-[11px] text-rose-400">{errors.email}</p>}
                   </div>
@@ -202,31 +206,33 @@ export default function Contact() {
 
                 {/* Subject */}
                 <div className="space-y-1.5">
-                  <label className="block font-code text-xs font-semibold text-slate-300">
+                  <label htmlFor="contact-subject" className="block font-code text-xs font-semibold text-slate-200">
                     Subject
                   </label>
                   <input
+                    id="contact-subject"
                     type="text"
                     placeholder="e.g. Full-Stack Project Inquiry / Job Opportunity"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white font-sans text-sm placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white font-sans text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/60 transition-colors"
                   />
                 </div>
 
                 {/* Message */}
                 <div className="space-y-1.5">
-                  <label className="block font-code text-xs font-semibold text-slate-300">
+                  <label htmlFor="contact-message" className="block font-code text-xs font-semibold text-slate-200">
                     Your Message <span className="text-rose-400">*</span>
                   </label>
                   <textarea
+                    id="contact-message"
                     rows={5}
                     placeholder="Tell me about your project, timeline, or position details..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className={`w-full px-4 py-3 rounded-xl bg-slate-950 border ${
                       errors.message ? 'border-rose-500/60' : 'border-slate-800'
-                    } text-white font-sans text-sm placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/60 transition-colors resize-none`}
+                    } text-white font-sans text-sm placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/60 transition-colors resize-none`}
                   />
                   {errors.message && <p className="font-code text-[11px] text-rose-400">{errors.message}</p>}
                 </div>

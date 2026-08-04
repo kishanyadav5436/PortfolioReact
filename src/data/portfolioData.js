@@ -28,8 +28,10 @@ export const featuredProject = {
   badge: "🚀 HACKATHON PROJECT",
   date: "Apr 2026",
   category: "fullstack",
-  description: "A full-stack Hyperlocal Marketplace connecting homeowners with verified service providers. Features real-time booking, role-based access control, JWT authentication, rating algorithms, provider dashboards, and responsive glassmorphism UI.",
-  outcome: "Built & deployed a complete full-stack MERN marketplace during Kalpathon 2026 hackathon. Production app live on Vercel.",
+  description: "A full-stack Hyperlocal Marketplace connecting homeowners with verified service providers.",
+  problem: "Local service discovery and home repair booking suffer from fragmented communication, opaque pricing, and untrusted provider verification.",
+  approach: "Architected a modular full-stack MERN application featuring JWT role-based security, real-time booking scheduling, interactive provider rating algorithms, and responsive glassmorphic UI.",
+  outcome: "Shipped a complete MERN marketplace within Kalpathon 2026 hackathon constraints with <150ms API latency. Deployed live on Vercel.",
   metrics: [
     { label: "Event", value: "Kalpathon 2026" },
     { label: "Latency", value: "<150ms API response" },
@@ -38,7 +40,8 @@ export const featuredProject = {
   tags: ["React", "TypeScript", "Node.js", "MongoDB", "Express.js", "JWT Auth", "Vercel"],
   liveUrl: "https://parth2-0-kishan-kumar.vercel.app/",
   githubUrl: "https://github.com/kishanyadav5436/Parth2.0_KishanKumar",
-  image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&h=700&fit=crop"
+  image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=1200&h=700&fit=crop&auto=format&q=80",
+  imageAlt: "Neighbourhood Service Marketplace dashboard interface showing provider listings and service booking calendar"
 };
 
 export const projects = [
@@ -48,12 +51,15 @@ export const projects = [
     category: "ai",
     date: "Jul 2026",
     badge: "🆕 RAG AI PIPELINE",
-    description: "Retrieval-Augmented Generation (RAG) system using LangChain & Hugging Face LLMs to answer complex student financial & fee structure queries directly from Excel data.",
-    outcome: "<1.5s query response latency with 100% extraction precision against official fee sheets.",
+    description: "Retrieval-Augmented Generation (RAG) system processing complex student financial data.",
+    problem: "Students faced manual delays navigating complex multi-tiered fee structures and unstructured policy documents.",
+    approach: "Engineered an end-to-end RAG pipeline using LangChain, Hugging Face LLM embeddings, FAISS vector search, and Streamlit UI to query tabular Excel datasets.",
+    outcome: "Reduced query response time to <1.5s with 100% data extraction precision against official fee sheets. Live on Streamlit Cloud.",
     tags: ["LangChain", "Hugging Face", "RAG Pipeline", "Streamlit", "Python"],
     liveUrl: "https://langchain-fee-chatbot-ay6qsacae.streamlit.app/",
     githubUrl: "https://github.com/kishanyadav5436/langchain-fee-chatbot",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "LangChain RAG AI chatbot interface executing natural language fee queries against structured financial documents"
   },
   {
     id: "student-stress-prediction",
@@ -61,12 +67,15 @@ export const projects = [
     category: "ai",
     date: "Jul 2026",
     badge: "🤖 ML PREDICTOR",
-    description: "Supervised ML web application evaluating sleep hours, study time, social media usage, and exam pressure to accurately predict student burn-out stress levels.",
-    outcome: "Achieved 94%+ cross-validated classification accuracy across 6 lifestyle health metrics.",
+    description: "Supervised ML health web application predicting student burnout stress levels.",
+    problem: "University counseling teams lacked proactive quantitative metrics to identify early warning signs of student burnout.",
+    approach: "Trained and cross-validated Random Forest & XGBoost classifiers in Scikit-Learn using 6 lifestyle health metrics (sleep hours, study load, exam pressure, social media usage). Deployed via Streamlit web app.",
+    outcome: "Achieved 94%+ cross-validated classification accuracy and deployed live prediction API for early stress intervention.",
     tags: ["Machine Learning", "Scikit-Learn", "Python", "Streamlit", "Pandas", "NumPy"],
     liveUrl: "https://studentstresslevelprediction5436.streamlit.app/",
     githubUrl: "https://github.com/kishanyadav5436/Student_Stress_Level_Prediction_System",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "Machine Learning stress predictor interface rendering multi-factor health metrics and burnout risk score"
   },
   {
     id: "ecommerce-sales-analytics",
@@ -74,12 +83,15 @@ export const projects = [
     category: "data",
     date: "Jul 2026",
     badge: "📊 DATA ANALYTICS",
-    description: "Interactive retail intelligence dashboard uncovering sales trends, top-performing product categories, regional revenue distribution, and customer purchasing patterns.",
-    outcome: "Processed 5,000+ transaction records into real-time visual business intelligence.",
+    description: "Interactive retail intelligence dashboard uncovering revenue trends and sales performance.",
+    problem: "E-commerce store managers suffered from static spreadsheet reports that obscured regional sales drops and top product drivers.",
+    approach: "Built a dynamic Python analytics dashboard leveraging Pandas data aggregations, Matplotlib/Seaborn visual charts, and Streamlit interactive filtering.",
+    outcome: "Processed 5,000+ transaction records into real-time visual business intelligence with sub-second drill-down filters.",
     tags: ["Python", "Streamlit", "Pandas", "Data Analytics", "Matplotlib"],
     liveUrl: "https://ecommercesalesdataanalytics-e7t5436.streamlit.app/",
     githubUrl: "https://github.com/kishanyadav5436/Ecommerce_Sales_Data_Analytics",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "E-commerce sales data dashboard displaying revenue breakdown and transaction trend charts"
   },
   {
     id: "blogsphere-app",
@@ -87,12 +99,15 @@ export const projects = [
     category: "fullstack",
     date: "Jul 2026",
     badge: "🚀 FULL-STACK",
-    description: "Full-stack publishing application supporting rich article creation, user authentication, interactive comments, dark mode, and seamless client-side routing.",
-    outcome: "Complete CRUD architecture with JWT session security deployed on Vercel.",
+    description: "Full-stack publishing application supporting rich article creation, user auth, and comments.",
+    problem: "Content creators needed a lightweight, secure publishing platform without heavy CMS bloat or slow page transitions.",
+    approach: "Designed a clean MERN stack architecture with React Single-Page App routing, Express RESTful endpoints, JWT session tokens, and MongoDB database storage.",
+    outcome: "Complete CRUD workflow with secure authentication and dark mode live on Vercel.",
     tags: ["React", "Node.js", "MongoDB", "Express.js", "JavaScript"],
     liveUrl: "https://blogsphere-app-sigma.vercel.app",
     githubUrl: "https://github.com/kishanyadav5436/blogsphere-app",
-    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "BlogSphere web application showing article creation screen and interactive comments feed"
   },
   {
     id: "ml-training-hub",
@@ -100,11 +115,14 @@ export const projects = [
     category: "ai",
     date: "Jul 2026",
     badge: "🔬 ML BENCHMARK",
-    description: "Supervised and deep learning benchmark repository containing Jupyter Notebook implementations of Decision Trees, KNN, Random Forest, and Linear Regression.",
-    outcome: "Evaluated 10+ algorithms on standardized datasets with hyperparameter tuning.",
+    description: "Supervised and deep learning benchmark repository with model evaluations.",
+    problem: "Standardizing model evaluation metrics across multiple supervised learning algorithms required reproducible benchmarking scripts.",
+    approach: "Developed reusable Jupyter Notebook pipelines for Decision Trees, K-NN, Random Forest, Linear Regression, and Neural Networks with automated grid search hyperparameter tuning.",
+    outcome: "Evaluated 10+ core algorithms on benchmark datasets, documenting accuracy, precision, recall, and loss curves.",
     tags: ["Jupyter", "Scikit-Learn", "TensorFlow", "Pandas", "NumPy"],
     githubUrl: "https://github.com/kishanyadav5436/ML_Training",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "Machine Learning experiments repository displaying code notebooks and model validation curves"
   },
   {
     id: "inclusivity-ai-chatbot",
@@ -112,12 +130,15 @@ export const projects = [
     category: "ai",
     date: "2025",
     badge: "💬 NLP CHATBOT",
-    description: "AI-driven dialogue system designed for multi-lingual inclusive support, integrating contextual NLP intent matching, admin control panel, and dark UI.",
-    outcome: "Deployed live on Vercel with role-based access control and REST API endpoints.",
+    description: "AI-driven dialogue system designed for multi-lingual inclusive support.",
+    problem: "Organizations required an intuitive chatbot to deliver inclusive multi-lingual support without language barrier friction.",
+    approach: "Integrated NLP intent classification, contextual matching algorithms, admin portal controls, and Tailwind CSS responsive interface in Node.js.",
+    outcome: "Deployed live on Vercel with role-based access control and REST API integrations.",
     tags: ["MERN Stack", "NLP", "Tailwind CSS", "REST API", "JWT Auth"],
     liveUrl: "https://inclusionchatbot.vercel.app/",
     githubUrl: "https://github.com/kishanyadav5436/Chatbot",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "Inclusivity AI Chatbot web interface presenting live NLP conversational view"
   },
   {
     id: "django-analytics-dashboard",
@@ -125,12 +146,15 @@ export const projects = [
     category: "data",
     date: "Apr 2026",
     badge: "⚡ PYTHON BI",
-    description: "Enterprise analytics portal built with Django backend. Features dynamic data filtering, Chart.js visual graphics, user auth, and responsive admin view.",
-    outcome: "Delivers secure multi-tenant data visualization hosted on Vercel.",
+    description: "Enterprise analytics portal built with Django backend and Chart.js graphics.",
+    problem: "Business teams required multi-tenant data visualization with strict user authentication controls.",
+    approach: "Architected a Django MVC portal leveraging PostgreSQL relations, Django ORM filters, and Chart.js dynamic front-end graphs.",
+    outcome: "Delivered secure multi-tenant analytical dashboard hosted live on Vercel.",
     tags: ["Python", "Django", "Charts.js", "Bootstrap", "PostgreSQL"],
     liveUrl: "https://dashboard-project-one-chi.vercel.app/accounts/login/?next=/dashboard/",
     githubUrl: "https://github.com/kishanyadav5436/Dashboard-Project",
-    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "Django analytics dashboard interface featuring interactive Chart.js line charts and data filters"
   },
   {
     id: "banking-system-java",
@@ -138,11 +162,14 @@ export const projects = [
     category: "fullstack",
     date: "Apr 2026",
     badge: "☕ JAVA & REACT",
-    description: "Financial management engine demonstrating object-oriented design principles. Features account transfers, transaction ledgers, and modernized React UI interface.",
-    outcome: "Successfully refactored Java CLI architecture into RESTful web application services.",
+    description: "Financial management engine demonstrating object-oriented design principles.",
+    problem: "Translating legacy CLI-based object-oriented financial logic into a modern, web-enabled application.",
+    approach: "Refactored Java OOP banking classes into RESTful API controllers and connected a React UI for account transfers and transaction ledger logging.",
+    outcome: "Successfully modernized Core Java OOP logic into a responsive full-stack financial web app.",
     tags: ["Core Java", "OOP", "React", "Data Structures"],
     githubUrl: "https://github.com/kishanyadav5436/Banking-System-in-Core-Java-master",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=500&fit=crop&auto=format&q=80",
+    imageAlt: "Core Java OOP banking web interface showing account transaction ledger and fund transfer screen"
   }
 ];
 

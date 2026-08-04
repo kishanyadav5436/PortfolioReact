@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Sparkles, Filter, Code2, Cpu, BarChart3, Layers } from 'lucide-react';
+import { Github, ExternalLink, Sparkles, Code2, Cpu, BarChart3, Layers, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { projects } from '../data/portfolioData';
 import FeaturedProject from './FeaturedProject';
 
@@ -33,8 +33,8 @@ export default function Projects() {
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">Engineering Work</span>
           </h2>
 
-          <p className="text-slate-400 font-sans text-base sm:text-lg">
-            Real solutions designed for measurable results — from RAG pipelines to scalable marketplaces.
+          <p className="text-slate-300 font-sans text-base sm:text-lg">
+            Real software built for real outcomes — evaluating problem, technical approach, and measurable impact.
           </p>
         </div>
 
@@ -50,10 +50,11 @@ export default function Projects() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
+                aria-pressed={isActive}
                 className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all duration-200 ${
                   isActive
                     ? 'bg-cyan-500/15 text-cyan-300 border-cyan-500/40 font-bold shadow-md shadow-cyan-500/10'
-                    : 'bg-slate-900/80 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200'
+                    : 'bg-slate-900/80 text-slate-300 border-slate-800 hover:border-slate-700 hover:text-white'
                 }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
@@ -74,16 +75,17 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-2xl bg-slate-900/90 border border-slate-800/80 overflow-hidden flex flex-col justify-between group hover:border-cyan-500/40 transition-all duration-300 shadow-xl"
+                className="rounded-2xl bg-slate-900/90 border border-slate-800 overflow-hidden flex flex-col justify-between group hover:border-cyan-500/40 transition-all duration-300 shadow-xl"
               >
                 <div>
-                  {/* Card Image Wrapper with Hover Zoom */}
+                  {/* Card Image Wrapper */}
                   <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden group/img">
                     <img
                       src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500 filter brightness-95"
+                      alt={project.imageAlt || project.title}
+                      decoding="async"
                       loading="lazy"
+                      className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500 filter brightness-95"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent" />
 
@@ -96,34 +98,43 @@ export default function Projects() {
 
                     {/* Date */}
                     <div className="absolute top-3 right-3">
-                      <span className="px-2 py-0.5 rounded bg-slate-900/80 font-code text-[10px] text-slate-400">
+                      <span className="px-2 py-0.5 rounded bg-slate-900/80 font-code text-[10px] text-slate-300 font-medium">
                         {project.date}
                       </span>
                     </div>
                   </div>
 
                   {/* Card Body Content */}
-                  <div className="p-6 space-y-3">
+                  <div className="p-6 space-y-4">
                     <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
                       {project.title}
                     </h3>
 
-                    <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-sans line-clamp-3">
-                      {project.description}
-                    </p>
+                    {/* Problem -> Approach Narrative */}
+                    <div className="space-y-2 text-xs font-sans">
+                      <div className="p-2.5 rounded-lg bg-slate-950/80 border border-rose-500/20 space-y-0.5">
+                        <span className="font-code text-[10px] font-bold text-rose-400 block">PROBLEM:</span>
+                        <p className="text-slate-200 leading-snug">{project.problem}</p>
+                      </div>
+
+                      <div className="p-2.5 rounded-lg bg-slate-950/80 border border-cyan-500/20 space-y-0.5">
+                        <span className="font-code text-[10px] font-bold text-cyan-400 block">APPROACH:</span>
+                        <p className="text-slate-200 leading-snug">{project.approach}</p>
+                      </div>
+                    </div>
 
                     {/* Outcome Highlight Box */}
-                    <div className="p-3 rounded-xl bg-cyan-500/5 border border-cyan-500/15 text-xs text-cyan-300 font-sans">
-                      <strong className="font-code text-[11px] text-cyan-400 block mb-0.5">OUTCOME:</strong>
+                    <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-200 font-sans">
+                      <strong className="font-code text-[11px] text-cyan-300 block mb-0.5">OUTCOME:</strong>
                       {project.outcome}
                     </div>
 
                     {/* Tech Tags */}
-                    <div className="flex flex-wrap gap-1.5 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {project.tags.map((tag, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/50 font-code text-[10px] text-slate-300"
+                          className="px-2 py-0.5 rounded bg-slate-800/80 border border-slate-700/50 font-code text-[10px] text-slate-200 font-medium"
                         >
                           {tag}
                         </span>
@@ -133,15 +144,16 @@ export default function Projects() {
                 </div>
 
                 {/* Card Footer Links */}
-                <div className="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-800/80">
+                <div className="px-6 pb-6 pt-3 flex items-center justify-between border-t border-slate-800">
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-code text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+                    aria-label={`View code for ${project.title} on GitHub`}
+                    className="inline-flex items-center gap-1.5 font-code text-xs font-semibold text-slate-300 hover:text-white transition-colors"
                   >
                     <Github className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Code</span>
+                    <span>Source Code</span>
                   </a>
 
                   {project.liveUrl ? (
@@ -149,13 +161,14 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Open live app demo for ${project.title}`}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 font-code text-xs font-bold text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition-all"
                     >
                       <span>Live App</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   ) : (
-                    <span className="font-code text-[11px] text-slate-500">
+                    <span className="font-code text-[11px] text-slate-400 font-medium">
                       Repo Benchmark
                     </span>
                   )}
@@ -172,7 +185,8 @@ export default function Projects() {
             href="https://github.com/kishanyadav5436"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-code text-xs font-semibold text-slate-300 bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-all shadow-md"
+            aria-label="Explore all repositories on GitHub"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-code text-xs font-semibold text-slate-200 bg-slate-900 border border-slate-800 hover:border-cyan-500/50 hover:text-white transition-all shadow-md"
           >
             <Github className="w-4 h-4 text-cyan-400" />
             <span>Explore All Repositories on GitHub</span>
