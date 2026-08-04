@@ -111,7 +111,7 @@ export default function FeaturedProject() {
                 <div className="px-3 py-0.5 rounded bg-slate-800 text-[10px] font-code text-slate-400 truncate max-w-[200px]">
                   parth2-0-kishan-kumar.vercel.app
                 </div>
-                <div className="text-[10px] font-code text-amber-400">WINNER</div>
+                <div className="text-[10px] font-code text-cyan-400">HACKATHON</div>
               </div>
 
               {/* View Container */}

@@ -15,7 +15,7 @@ export const personalDetails = {
 };
 
 export const heroStats = [
-  { label: "Hackathon Victory", value: "1st Place", subtext: "Kalpathon 2026 Winner" },
+  { label: "Hackathon Project", value: "Participant", subtext: "Kalpathon 2026" },
   { label: "AI/ML & RAG Apps", value: "4+", subtext: "Deployed in Production" },
   { label: "Shipped Projects", value: "9+", subtext: "Full-Stack & Analytics" },
   { label: "Formal Certifications", value: "4+", subtext: "JPMC, Deloitte, Google" },
@@ -24,14 +24,14 @@ export const heroStats = [
 export const featuredProject = {
   id: "neighbourhood-marketplace",
   title: "Neighbourhood Service Marketplace",
-  subtitle: "Kalpathon Hackathon 2026 1st Place Winner",
-  badge: "🏆 HACKATHON WINNER",
+  subtitle: "Kalpathon Hackathon 2026 Project",
+  badge: "🚀 HACKATHON PROJECT",
   date: "Apr 2026",
   category: "fullstack",
   description: "A full-stack Hyperlocal Marketplace connecting homeowners with verified service providers. Features real-time booking, role-based access control, JWT authentication, rating algorithms, provider dashboards, and responsive glassmorphism UI.",
-  outcome: "Won 1st Place out of dozens of competing engineering teams. Fully responsive production app deployed on Vercel.",
+  outcome: "Built & deployed a complete full-stack MERN marketplace during Kalpathon 2026 hackathon. Production app live on Vercel.",
   metrics: [
-    { label: "Award", value: "1st Place Winner" },
+    { label: "Event", value: "Kalpathon 2026" },
     { label: "Latency", value: "<150ms API response" },
     { label: "Coverage", value: "100% Full-Stack MERN" }
   ],
@@ -183,12 +183,12 @@ export const experience = [
     highlights: ["Built & deployed multi-page web applications", "Applied clean OOP and component modularity"]
   },
   {
-    title: "Kalpathon Hackathon — 1st Place Winner",
+    title: "Kalpathon Hackathon — Participant",
     company: "Kalpathon 2026",
     period: "Apr 2026",
     location: "Hackathon Event",
-    description: "Spearheaded the development of Neighbourhood Service Marketplace under high time constraints, winning 1st place for full-stack engineering excellence and UI presentation.",
-    highlights: ["Won 1st Place out of top developer teams", "Shipped complete MERN marketplace in hackathon timeline"]
+    description: "Spearheaded the development of Neighbourhood Service Marketplace under high time constraints, delivering full-stack engineering excellence and UI presentation.",
+    highlights: ["Participated in Kalpathon 2026 hackathon", "Shipped complete MERN marketplace in hackathon timeline"]
   },
   {
     title: "Advanced Software Engineering Virtual Experience",
@@ -287,7 +287,7 @@ export const certsWorkshops = [
     date: "Jun 2026"
   },
   {
-    title: "Kalpathon 2026 Hackathon 1st Place Certificate",
+    title: "Kalpathon 2026 Hackathon Participation Certificate",
     issuer: "Kalpathon Organizers",
     date: "Apr 2026"
   },

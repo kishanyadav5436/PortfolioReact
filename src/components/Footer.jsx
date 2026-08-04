@@ -15,7 +15,7 @@ export default function Footer() {
               <span>Kishan Kumar</span>
             </div>
             <p className="text-slate-400 font-sans text-xs">
-              AI/ML Engineer & Full-Stack Developer • Hackathon Winner 2026
+              AI/ML Engineer & Full-Stack Developer • Kalpathon Hackathon 2026
             </p>
           </div>
 

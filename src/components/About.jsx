@@ -41,7 +41,7 @@ export default function About() {
                 I'm a Computer Science student at <strong className="text-white">Babu Banarasi Das University, Lucknow</strong>, obsessed with constructing software systems that solve real human problems. My journey started with vanilla web design, grew into building full-stack MERN apps, and expanded into <strong className="text-cyan-300">AI/ML architectures — LangChain, Hugging Face, Scikit-Learn, and RAG pipelines</strong>.
               </p>
               <p>
-                Recently, I <strong className="text-amber-400 font-semibold">won 1st Place at Kalpathon Hackathon 2026</strong> by building a full-stack Neighbourhood Service Marketplace. That adrenaline rush of turning raw business requirements into working production code within hours is what drives me every day.
+                Recently, I <strong className="text-cyan-400 font-semibold">participated in Kalpathon Hackathon 2026</strong> by building a full-stack Neighbourhood Service Marketplace. That adrenaline rush of turning raw business requirements into working production code within hours is what drives me every day.
               </p>
               <p>
                 When I'm not writing Python scripts or React components, you'll find me reading LLM research papers, exploring open-source models, or watching anime.

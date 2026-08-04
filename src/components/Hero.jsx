@@ -24,8 +24,8 @@ export default function Hero() {
               className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs font-code text-cyan-300 shadow-sm"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <Trophy className="w-3.5 h-3.5 text-amber-400" />
-              <span>Kalpathon 2026 Hackathon Winner</span>
+              <Trophy className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Kalpathon 2026 Hackathon Participant</span>
               <span className="text-slate-600">|</span>
               <span className="text-slate-400">Lucknow, IN</span>
             </motion.div>
@@ -190,7 +190,7 @@ export default function Hero() {
                   <span className="text-slate-400">education:</span> <span className="text-emerald-300">'BBD University (CSE 2026)'</span>,
                 </div>
                 <div className="pl-4">
-                  <span className="text-slate-400">hackathonWinner:</span> <span className="text-amber-400">true</span> <span className="text-slate-500">// Kalpathon 1st Place</span>,
+                  <span className="text-slate-400">hackathonParticipant:</span> <span className="text-cyan-400">true</span> <span className="text-slate-500">// Kalpathon 2026</span>,
                 </div>
 
                 <div className="pl-4">
