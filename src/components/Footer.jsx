@@ -1,5 +1,4 @@
-import React from 'react';
-import { Terminal, Github, Linkedin, Mail, MessageSquare, GitBranch, ShieldCheck } from 'lucide-react';
+import { GitBranch, Github, Linkedin, Mail, MessageSquare, ShieldCheck, Terminal } from 'lucide-react';
 import { personalDetails } from '../data/portfolioData';
 
 export default function Footer() {
@@ -58,6 +57,41 @@ export default function Footer() {
             >
               <MessageSquare className="w-4 h-4" />
             </a>
+          </div>
+        </div>
+
+        <div className="mb-8 rounded-2xl border border-slate-800 bg-slate-900/70 p-5 sm:p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-white">Open to AI/ML Engineer and Full-Stack opportunities.</p>
+              <p className="mt-1 text-xs text-slate-400">Looking for strong product-minded builders who can ship end-to-end from idea to deployment.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={personalDetails.resumePath}
+                download="Kishan_Kumar_Resume.pdf"
+                className="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-4 py-2 text-xs font-semibold text-slate-950 transition hover:bg-cyan-400"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                <span>Download Resume</span>
+              </a>
+              <a
+                href={personalDetails.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-950 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-cyan-500/40 hover:text-white"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href={`mailto:${personalDetails.email}`}
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-950 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-emerald-500/40 hover:text-emerald-300"
+              >
+                <Mail className="w-3.5 h-3.5" />
+                <span>Email Me</span>
+              </a>
+            </div>
           </div>
         </div>
 

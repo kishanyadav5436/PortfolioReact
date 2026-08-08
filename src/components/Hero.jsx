@@ -1,7 +1,6 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, MessageSquare, Download, ArrowRight, Code, Trophy, Sparkles, Terminal, Cpu } from 'lucide-react';
-import { personalDetails, heroStats } from '../data/portfolioData';
+import { ArrowRight, Code, Download, Github, Linkedin, Mail, MessageSquare, Sparkles, Terminal, Trophy } from 'lucide-react';
+import { heroStats, personalDetails } from '../data/portfolioData';
 
 export default function Hero() {
   return (
@@ -25,7 +24,7 @@ export default function Hero() {
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
               <Trophy className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="font-semibold text-slate-200">Kalpathon 2026 Hackathon Participant</span>
+              <span className="font-semibold text-slate-200">Open to AI/ML Engineer & Full-Stack roles</span>
               <span className="text-slate-600">|</span>
               <span className="text-slate-300">Lucknow, IN</span>
             </motion.div>
@@ -38,7 +37,7 @@ export default function Hero() {
               className="space-y-3"
             >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-                Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">Production RAG AI</span> & High-Impact Web Apps
+                AI/ML Engineer + Full-Stack Developer building <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">RAG systems</span>, ML models, and production web apps.
               </h1>
               <div className="text-base sm:text-xl font-code text-slate-200 font-semibold flex flex-wrap items-center gap-2">
                 <span className="text-cyan-400 font-bold">&gt;</span>
@@ -55,8 +54,19 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-slate-200 max-w-2xl leading-relaxed font-sans"
             >
-              I solve operational bottlenecks by engineering high-performance software — from precision <strong className="text-cyan-300 font-semibold">RAG AI chatbots</strong> (&lt;1.5s query latency) and multi-variate <strong className="text-emerald-300 font-semibold">stress predictors</strong> (94%+ accuracy) to Kalpathon hackathon-shipped full-stack platforms.
+              I build intelligent products that turn unstructured data into fast answers and predictive systems into reliable decisions — from <strong className="text-cyan-300 font-semibold">RAG chatbots</strong> with sub-1.5s response time to <strong className="text-emerald-300 font-semibold">ML predictors</strong> with 94%+ accuracy.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex flex-wrap gap-2 max-w-2xl"
+            >
+              <span className="px-3 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 text-cyan-200 text-sm font-medium">RAG & LLMs</span>
+              <span className="px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-200 text-sm font-medium">94%+ predictive accuracy</span>
+              <span className="px-3 py-1.5 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-200 text-sm font-medium">Live apps shipped</span>
+            </motion.div>
 
             {/* Social Links Row */}
             <motion.div
