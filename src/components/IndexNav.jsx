@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
+import { useIntroSequence } from '../hooks/useIntroSequence';
 
 const SECTIONS = [
   { id: 'desk',           label: 'desk' },
@@ -21,6 +22,7 @@ const SECTIONS = [
 export default function IndexNav() {
   const [activeId, setActiveId] = useState('desk');
   const observerRef = useRef(null);
+  const { stage, isFirstLoad } = useIntroSequence();
 
   useEffect(() => {
     const sectionEls = SECTIONS
@@ -55,8 +57,14 @@ export default function IndexNav() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const showNav = stage >= 3;
+
   return (
-    <nav className="index-nav" aria-label="Section index" role="navigation">
+    <nav
+      className={`index-nav ${isFirstLoad ? 'intro-active' : ''} ${showNav ? 'visible' : ''}`}
+      aria-label="Section index"
+      role="navigation"
+    >
       <span className="index-nav__mark" aria-hidden="true">fn.</span>
 
       {SECTIONS.map(({ id, label }) => (

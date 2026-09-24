@@ -1,35 +1,64 @@
 /**
  * DeskHero.jsx
  * Above-the-fold desk — bio header + tech arsenal + scattered project cards.
- * All data pulled from PROFILE and STACK constants in projects.js.
+ * Orchestrates the "opening the notebook" first-load sequence.
  */
 
 import ProjectCard from './ProjectCard';
 import { useSettleIn } from '../hooks/useSettleIn';
+import { useIntroSequence } from '../hooks/useIntroSequence';
 import { projects, PROFILE, STACK } from '../data/projects';
 
 export default function DeskHero() {
+  const { stage, isFirstLoad } = useIntroSequence();
+
+  // trigger stagger once stage >= 3 (desk settles)
+  const triggerStagger = stage >= 3;
   // +2 slots: 0 = header, 1 = arsenal, then project cards
-  const visible = useSettleIn(projects.length + 2, 60, 80);
+  const visible = useSettleIn(projects.length + 2, 60, 80, triggerStagger);
+
+  // Derive CSS classes based on stage
+  const showName = stage >= 1;
+  const showTagline = stage >= 2;
+  const showDesk = stage >= 3;
 
   return (
-    <section id="desk" className="desk-hero" aria-label="Desk — introduction and projects">
+    <section id="desk" className={`desk-hero ${isFirstLoad ? 'intro-active' : ''}`} aria-label="Desk — introduction and projects">
 
       {/* ── Bio header ────────────────────────────────── */}
       <header
-        className={`desk-hero__header ${visible[0] ? 'settle-visible' : 'settle-hidden'}`}
+        className={`desk-hero__header`}
         style={{ '--card-rotation': '0deg' }}
       >
-        <span className="desk-hero__eyebrow">
+        <span className={`desk-hero__eyebrow intro-fade ${showDesk ? 'visible' : ''}`}>
           field journal &middot; 2025–2026 &middot; Lucknow, UP, India
         </span>
 
-        <h1 className="desk-hero__name">
-          Kishan Kumar<br />
-          <em>builds things that work.</em>
+        {/* The Stroke-Draw SVG Name */}
+        <h1 className={`desk-hero__name-wrap ${showName ? 'draw-active' : ''}`}>
+          <svg
+            className="intro-name-svg"
+            viewBox="0 0 420 80"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="Kishan Kumar"
+            role="img"
+          >
+            {/* Using text outline for stroke animation */}
+            <text
+              x="0"
+              y="60"
+              className="intro-name-text"
+            >
+              Kishan Kumar
+            </text>
+          </svg>
         </h1>
 
-        <p className="desk-hero__tagline">
+        <p className={`desk-hero__tagline intro-stamp ${showTagline ? 'visible' : ''}`}>
+          <em>builds things that work.</em>
+        </p>
+
+        <p className={`desk-hero__bio intro-fade ${showDesk ? 'visible' : ''}`}>
           Full-stack MERN developer. ML practitioner. Final year B.Tech CSE at BBDU, Lucknow
           (CGPA&nbsp;8.6, expected&nbsp;2027). 50+ DSA problems in Java.
           These notes document actual decisions — what got built, what broke, what I learned.
@@ -37,6 +66,7 @@ export default function DeskHero() {
 
         {/* Stats row */}
         <div
+          className={`intro-fade ${showDesk ? 'visible' : ''}`}
           style={{
             display: 'flex',
             gap: '2rem',
@@ -51,7 +81,7 @@ export default function DeskHero() {
             { label: 'DSA', value: '50+ Java' },
             { label: 'Internships', value: '2 completed' },
           ].map(({ label, value }) => (
-            <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+             <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -78,6 +108,7 @@ export default function DeskHero() {
 
         {/* Quick links */}
         <div
+          className={`intro-fade ${showDesk ? 'visible' : ''}`}
           style={{
             display: 'flex',
             gap: '1.5rem',

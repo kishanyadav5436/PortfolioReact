@@ -5,24 +5,27 @@
  * Respects prefers-reduced-motion by skipping the stagger.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useReducedMotion } from './useReducedMotion';
 
 /**
  * @param {number} count       — number of items to stagger
  * @param {number} baseDelay   — ms before the first item appears (default 120)
  * @param {number} staggerStep — ms between each item (default 80)
+ * @param {boolean} trigger    — if false, won't start until true
  * @returns {boolean[]} visibleFlags — array of length `count`, true when that item should show
  */
-export function useSettleIn(count, baseDelay = 120, staggerStep = 80) {
+export function useSettleIn(count, baseDelay = 120, staggerStep = 80, trigger = true) {
   const reducedMotion = useReducedMotion();
 
-  // If reduced motion: everything visible immediately
+  // If reduced motion: everything visible immediately (once triggered)
   const [visible, setVisible] = useState(
-    reducedMotion ? Array(count).fill(true) : Array(count).fill(false)
+    reducedMotion && trigger ? Array(count).fill(true) : Array(count).fill(false)
   );
 
   useEffect(() => {
+    if (!trigger) return;
+
     if (reducedMotion) {
       setVisible(Array(count).fill(true));
       return;
@@ -46,8 +49,7 @@ export function useSettleIn(count, baseDelay = 120, staggerStep = 80) {
     }
 
     return () => timers.forEach(clearTimeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count, baseDelay, staggerStep, reducedMotion]);
+  }, [count, baseDelay, staggerStep, trigger, reducedMotion]);
 
   return visible;
 }
