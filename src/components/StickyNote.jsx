@@ -144,19 +144,31 @@ export default function StickyNote() {
       >
         <h2 className="sticky-note__heading">Let's work together.</h2>
         <p className="sticky-note__body">
-          I'm Kishan Yadav — full-stack + AI/ML engineer, currently pursuing B.Tech CSE at BBD University, Lucknow.
-          Focused on Next.js 14, MERN architecture, and generative AI applications.
+          I'm Kishan Kumar — full-stack MERN developer and ML practitioner, pursuing B.Tech CSE
+          at Babu Banarasi Das University, Lucknow (CGPA&nbsp;8.6, 2027).
           <br /><br />
-          If you're building something ambitious and need someone who cares about the details,
-          I'd like to hear about it.
+          If you're building something that needs careful engineering and someone who cares
+          about the details, I'd like to hear about it.
         </p>
+
+        {/* Resume download */}
+        <a
+          id="resume-download"
+          href="/resume.pdf"
+          download="Kishan_Kumar_Resume.pdf"
+          className="resume-download"
+          aria-label="Download Kishan Kumar resume PDF"
+          style={{ marginBottom: '1rem', display: 'inline-flex' }}
+        >
+          ↓ download résumé
+        </a>
 
         <div className="sticky-note__links" role="list">
           <a
             id="contact-email"
             href={`mailto:${PROFILE.email}`}
             className="sticky-note__link"
-            aria-label="Email Kishan Yadav"
+            aria-label="Email Kishan Kumar"
             role="listitem"
           >
             <span className="sticky-note__link-arrow">✉</span>
@@ -168,7 +180,7 @@ export default function StickyNote() {
             target="_blank"
             rel="noopener noreferrer"
             className="sticky-note__link"
-            aria-label="GitHub profile (opens in new tab)"
+            aria-label="Kishan Kumar on GitHub (opens in new tab)"
             role="listitem"
           >
             <span className="sticky-note__link-arrow">⌥</span>
@@ -180,7 +192,7 @@ export default function StickyNote() {
             target="_blank"
             rel="noopener noreferrer"
             className="sticky-note__link"
-            aria-label="LinkedIn profile (opens in new tab)"
+            aria-label="Kishan Kumar on LinkedIn (opens in new tab)"
             role="listitem"
           >
             <span className="sticky-note__link-arrow">↗</span>
@@ -192,7 +204,7 @@ export default function StickyNote() {
             target="_blank"
             rel="noopener noreferrer"
             className="sticky-note__link"
-            aria-label="Live portfolio (opens in new tab)"
+            aria-label="Kishan Kumar live portfolio (opens in new tab)"
             role="listitem"
           >
             <span className="sticky-note__link-arrow">◈</span>
@@ -202,7 +214,7 @@ export default function StickyNote() {
       </div>
 
       <p className="sticky-footer-note">
-        Fieldnotes — Kishan Yadav (kishanyadav5436) · built with Vite + React + plain CSS ·
+        Fieldnotes — Kishan Kumar · github.com/kishanyadav5436 · built with Vite + React + plain CSS ·
         no analytics · <time dateTime="2026">&copy; 2026</time>
       </p>
     </footer>

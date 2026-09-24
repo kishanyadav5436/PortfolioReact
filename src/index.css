@@ -532,7 +532,7 @@ a:hover { opacity: 0.75; }
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
 }
 
 .fieldnote__stack-item {
@@ -543,6 +543,59 @@ a:hover { opacity: 0.75; }
   padding: 3px 8px;
   border-radius: 2px;
   background: var(--paper-dark);
+}
+
+/* ── Toggle button ── */
+.fieldnote__toggle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--pen);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.15s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-style: dashed;
+}
+
+.fieldnote__toggle:hover { opacity: 0.7; }
+
+.fieldnote__toggle:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Collapsible body ── */
+.fieldnote__expand-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease;
+  overflow: hidden;
+}
+
+.fieldnote__expand-wrap > .fieldnote__body {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.fieldnote__expand-wrap.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fieldnote__expand-wrap {
+    transition: none !important;
+  }
 }
 
 /* ============================================================
@@ -952,6 +1005,74 @@ mark {
 @media (prefers-reduced-motion: reduce) {
   #root {
     animation: none;
+  }
+}
+/* ============================================================
+   Resume download button — in hero and/or footer
+   ============================================================ */
+.resume-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--paper-light);
+  background: var(--pen);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  letter-spacing: 0.02em;
+}
+
+.resume-download:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.resume-download:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resume-download {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Ensure all interactive nav tabs, verify links, toggle buttons
+   have visible --pen focus rings (accessibility audit)
+   ============================================================ */
+.index-nav__tab:focus-visible,
+.sticky-note__link:focus-visible,
+.project-card:focus-visible,
+.project-card__close:focus-visible,
+.fieldnote__toggle:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Mobile: ensure filmstrip scrolls horizontally and doesn't overflow */
+@media (max-width: 375px) {
+  .filmstrip__track {
+    gap: 8px;
+  }
+
+  .filmstrip__frame {
+    width: 160px;
+  }
+
+  .fieldnote__expand-wrap.is-open {
+    overflow: visible;
+  }
+
+  .fieldnote__header {
+    grid-template-columns: 1fr;
   }
 }
 

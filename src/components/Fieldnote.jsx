@@ -1,11 +1,18 @@
 /**
  * Fieldnote.jsx
  * One dated notebook-page section per project.
- * Written as dated field journal entries, not Problem/Solution/Result.
- * Shows real repo links and category badges.
+ * Fixes applied:
+ *  - Collapsed by default; expands in-place via CSS max-height/opacity transition
+ *  - Keyboard operable (Enter/Space on toggle, Escape to collapse)
+ *  - prefers-reduced-motion: skip transition, instant show/hide
+ *  - "role —", "period —", "stack — N tools" labels removed/simplified
+ *  - Filmstrip showHint only on first project (index === 0)
+ *  - No "stack — N tools" count text; pills already show the tools
  */
 
+import { useState, useCallback, useRef, useId } from 'react';
 import Filmstrip from './Filmstrip';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export default function Fieldnote({ project, index }) {
   const {
@@ -20,7 +27,13 @@ export default function Fieldnote({ project, index }) {
     stack = [],
     entries = [],
     images = [],
+    summary,
   } = project;
+
+  const [open, setOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const bodyId = useId();
+  const toggleRef = useRef(null);
 
   const displayDate = new Date(date).toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -28,12 +41,26 @@ export default function Fieldnote({ project, index }) {
     year: 'numeric',
   });
 
+  const toggle = useCallback(() => setOpen((v) => !v), []);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+    if (e.key === 'Escape' && open) {
+      setOpen(false);
+      toggleRef.current?.focus();
+    }
+  }, [open, toggle]);
+
   return (
     <article
       id={id}
       className="fieldnote"
       aria-label={`Fieldnote: ${title}`}
     >
+      {/* ── Always-visible collapsed header ── */}
       <header className="fieldnote__header">
         <div>
           <span className="fieldnote__project-num">
@@ -58,8 +85,33 @@ export default function Fieldnote({ project, index }) {
             {category}
           </span>
 
+          {/* One-line summary always visible */}
+          {summary && (
+            <p
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.78rem',
+                color: 'var(--muted)',
+                lineHeight: 1.65,
+                marginTop: '0.6rem',
+                maxWidth: 560,
+              }}
+            >
+              {summary}
+            </p>
+          )}
+
+          {/* Stack pills — always visible, no "N tools" count */}
+          {stack.length > 0 && (
+            <div className="fieldnote__stack" style={{ marginTop: '0.75rem' }} aria-label="Technologies">
+              {stack.map((s) => (
+                <span key={s} className="fieldnote__stack-item">{s}</span>
+              ))}
+            </div>
+          )}
+
           {/* Repo / live links */}
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.6rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
             {repo && (
               <a
                 href={repo}
@@ -84,47 +136,61 @@ export default function Fieldnote({ project, index }) {
                 ◈ live demo
               </a>
             )}
+
+            {/* Toggle button */}
+            <button
+              ref={toggleRef}
+              className="fieldnote__toggle"
+              onClick={toggle}
+              onKeyDown={handleKeyDown}
+              aria-expanded={open}
+              aria-controls={bodyId}
+              aria-label={open ? `Collapse ${title} fieldnote` : `Read ${title} fieldnote`}
+              tabIndex={0}
+            >
+              {open ? '↑ collapse' : 'read fieldnote →'}
+            </button>
           </div>
         </div>
 
-        <aside className="fieldnote__meta" aria-label="Project metadata">
-          <div>
-            <span className="fieldnote__meta-label">role — </span>
+        {/* Metadata aside — simplified, no "role —" prefixes */}
+        <aside
+          className="fieldnote__meta"
+          aria-label="Project metadata"
+        >
+          <div style={{ fontStyle: 'italic', color: 'var(--ink-light)', fontSize: '0.72rem' }}>
             {roleTag}
           </div>
-          <div>
-            <span className="fieldnote__meta-label">period — </span>
+          <div style={{ color: 'var(--muted)', fontSize: '0.65rem', marginTop: '0.2rem' }}>
             {weekLabel}
-          </div>
-          <div>
-            <span className="fieldnote__meta-label">stack — </span>
-            {stack.length} tools
           </div>
         </aside>
       </header>
 
-      <div className="fieldnote__body">
-        {/* Dated journal entries */}
-        {entries.map((entry, i) => (
-          <div key={i} className="fieldnote__entry">
-            <span className="fieldnote__entry-week">{entry.week}</span>
-            <p className="fieldnote__entry-text">{entry.text}</p>
-          </div>
-        ))}
+      {/* ── Expandable body ── */}
+      <div
+        id={bodyId}
+        className={`fieldnote__expand-wrap${open ? ' is-open' : ''}`}
+        style={reducedMotion
+          ? { display: open ? 'block' : 'none' }
+          : undefined
+        }
+        aria-hidden={!open}
+      >
+        <div className="fieldnote__body" style={{ paddingTop: '1.5rem' }}>
+          {/* Dated journal entries */}
+          {entries.map((entry, i) => (
+            <div key={i} className="fieldnote__entry">
+              <span className="fieldnote__entry-week">{entry.week}</span>
+              <p className="fieldnote__entry-text">{entry.text}</p>
+            </div>
+          ))}
 
-        {/* Filmstrip */}
-        {images.length > 0 && (
-          <Filmstrip images={images} projectId={id} />
-        )}
-
-        {/* Stack tags */}
-        {stack.length > 0 && (
-          <div className="fieldnote__stack" aria-label="Technologies used">
-            {stack.map((s) => (
-              <span key={s} className="fieldnote__stack-item">{s}</span>
-            ))}
-          </div>
-        )}
+          {/* Filmstrip — drag hint only on first project */}
+          {images.length > 0 && (
+            <Filmstrip images={images} projectId={id} showHint={index === 0} />
+          )}
+        </div>
       </div>
     </article>
   );
