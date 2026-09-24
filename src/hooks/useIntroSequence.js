@@ -26,15 +26,19 @@ export function useIntroSequence() {
   const isFirstLoad = stage !== 4;
 
   useEffect(() => {
-    if (stage === 4) return;
+    // If it already played this session, skip entirely
+    if (sessionStorage.getItem('introPlayed') === 'true') {
+      setStage(4);
+      return;
+    }
 
     if (reducedMotion) {
-      // Reduced motion: skip the complex staggered animation, just fade in quickly
       setTimeout(() => setStage(4), 50);
       sessionStorage.setItem('introPlayed', 'true');
       return;
     }
 
+    // Schedule sequence strictly once on mount
     const t1 = setTimeout(() => setStage(1), 300);
     const t2 = setTimeout(() => setStage(2), 1200);
     const t3 = setTimeout(() => setStage(3), 1500);
@@ -42,14 +46,21 @@ export function useIntroSequence() {
       setStage(4);
       sessionStorage.setItem('introPlayed', 'true');
     }, 2200);
+    
+    // Hard fallback safety net if anything hangs
+    const tFail = setTimeout(() => {
+      setStage(4);
+    }, 3500);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
       clearTimeout(t4);
+      clearTimeout(tFail);
     };
-  }, [stage, reducedMotion]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reducedMotion]); // Removed `stage` to prevent re-triggering the timeouts
 
   return { stage, isFirstLoad };
 }

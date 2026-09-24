@@ -571,30 +571,26 @@ a:hover { opacity: 0.75; }
   border-radius: 2px;
 }
 
-/* ── Collapsible body ── */
-.fieldnote__expand-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition:
-    grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.35s ease;
-  overflow: hidden;
+/* ── Fieldnote Swap (Preview vs Full) ── */
+.fieldnote__preview.hidden,
+.fieldnote__full.hidden {
+  display: none;
+}
+.fieldnote__preview.visible,
+.fieldnote__full.visible {
+  display: block;
+  animation: swap-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.fieldnote__expand-wrap > .fieldnote__body {
-  overflow: hidden;
-  min-height: 0;
-}
-
-.fieldnote__expand-wrap.is-open {
-  grid-template-rows: 1fr;
-  opacity: 1;
+@keyframes swap-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fieldnote__expand-wrap {
-    transition: none !important;
+  .fieldnote__preview.visible,
+  .fieldnote__full.visible {
+    animation: none !important;
   }
 }
 
@@ -1112,8 +1108,10 @@ mark {
   fill: transparent;
   stroke: var(--pen);
   stroke-width: 1px;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  paint-order: stroke fill;
+  stroke-linejoin: round;
   /* Not animated by default, keeps it hidden in stage 0 */
 }
 
