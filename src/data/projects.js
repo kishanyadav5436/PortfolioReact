@@ -199,6 +199,78 @@ export const ACHIEVEMENTS = [
 // ── Projects ─────────────────────────────────────────────────
 export const projects = [
   {
+    id: 'ai-revenue-agent',
+    title: 'AI-Powered Revenue Recovery Agent',
+    category: 'AI · Full-Stack',
+    roleTag: 'AI & Full-Stack Developer',
+    weekLabel: 'Next.js · LangChain · OpenAI',
+    date: '2026-08-01',
+    summary: 'An AI agent designed to solve a real business problem. Deployed as a scalable web application demonstrating generative AI integrations for revenue recovery.',
+    repo: 'https://github.com/kishanyadav5436/AI-Powered-Revenue-Recovery-Agent',
+    live: null,
+    liveUrl: 'https://ai-powered-revenue-recovery-agent.vercel.app',
+    stack: ['Next.js', 'TypeScript', 'LangChain', 'OpenAI', 'Tailwind CSS'],
+    entries: [
+      {
+        week: 'Week 1 -- Prompt engineering & agent logic',
+        text: 'The core of any AI product isn\'t the UI, it\'s the prompt structure and the agent logic. I started by defining the system prompts and testing the LLM\'s ability to parse unpaid invoice data, draft personalized recovery emails, and suggest negotiation strategies. Used LangChain to orchestrate the LLM calls and manage context.'
+      },
+      {
+        week: 'Week 2 -- Full-stack integration',
+        text: 'Wrapped the intelligence in a Next.js application. Built a dashboard to upload invoice datasets and visualize the agent\'s proposed actions. The challenge was streaming the LLM responses to the frontend so the user isn\'t staring at a spinner for 10 seconds. Real business value requires real UX.'
+      }
+    ],
+    images: []
+  },
+  {
+    id: 'portfolio-kishan',
+    title: 'PortfolioKishan',
+    category: 'Frontend · UI/UX',
+    roleTag: 'Frontend Developer',
+    weekLabel: 'React · Personal Branding',
+    date: '2026-09-01',
+    summary: 'My personal portfolio showcasing design, presentation, and technical work in one place. Focuses on personal branding and demonstrating UI/UX capabilities.',
+    repo: 'https://github.com/kishanyadav5436/PortfolioKishan',
+    live: null,
+    liveUrl: 'https://portfolio-kishan.vercel.app/',
+    stack: ['React', 'CSS3', 'Vite', 'JavaScript'],
+    entries: [
+      {
+        week: 'Design Phase',
+        text: 'A portfolio is a developer\'s most important product. I focused on clean typography, distinct branding, and a layout that tells a story rather than just dumping links. The aesthetic choices were deliberate: stand out from template-driven portfolios while maintaining high readability.'
+      },
+      {
+        week: 'Implementation',
+        text: 'Built with React and Vite for maximum performance. Prioritized smooth transitions and interactive elements that feel native and responsive. The live preview integrations and fieldnote structure allow visitors to explore the code contextually.'
+      }
+    ],
+    images: []
+  },
+  {
+    id: 'banking-system',
+    title: 'Banking System in Core Java',
+    category: 'Backend · Core Java',
+    roleTag: 'Backend Developer',
+    weekLabel: 'Java · OOP · Fundamentals',
+    date: '2025-05-15',
+    summary: 'A robust backend system built in Core Java demonstrating strong grasp of OOP fundamentals, application logic, and database/app flow.',
+    repo: 'https://github.com/kishanyadav5436/Banking-System-in-Core-Java-master',
+    live: null,
+    liveUrl: 'https://banking-system-in-core-java-master-1.onrender.com/dashboard',
+    stack: ['Java', 'OOP', 'JDBC', 'MySQL'],
+    entries: [
+      {
+        week: 'Architecture & OOP Design',
+        text: 'Designed the system using strict Object-Oriented principles. Modeled Accounts, Customers, and Transactions as distinct entities with proper encapsulation. This wasn\'t about frameworks; it was about raw logic and writing clean, maintainable Java code.'
+      },
+      {
+        week: 'Database Integration',
+        text: 'Implemented JDBC to connect the Java application to the database. Wrote SQL queries for complex transactional workflows (deposits, withdrawals, transfers) ensuring ACID compliance and data integrity at the application layer.'
+      }
+    ],
+    images: []
+  },
+  {
     id: 'servicehub',
     title: 'ServiceHub',
     category: 'Full-Stack · Hackathon',
