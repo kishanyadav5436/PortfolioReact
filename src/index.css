@@ -1154,3 +1154,120 @@ mark {
   from { opacity: 0; transform: translateX(-20px); }
   to   { opacity: 1; transform: translateX(0); }
 }
+
+/* ============================================================
+   Live Preview Component
+   ============================================================ */
+
+.live-preview {
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+.live-preview__chrome {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  background: rgba(33, 29, 23, 0.02); /* subtle tint */
+}
+
+.live-preview__dots {
+  display: flex;
+  gap: 6px;
+  margin-right: 1rem;
+}
+.live-preview__dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+.live-preview__dots .dot:nth-child(1) { background: rgba(178, 58, 46, 0.5); }
+.live-preview__dots .dot:nth-child(2) { background: rgba(220, 160, 50, 0.5); }
+.live-preview__dots .dot:nth-child(3) { background: rgba(50, 160, 100, 0.5); }
+
+.live-preview__url-bar {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-decoration: none;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 2px 10px;
+  flex-grow: 1;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.live-preview__url-bar:hover {
+  color: var(--pen);
+}
+
+.live-preview__viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: rgba(33, 29, 23, 0.02);
+}
+
+.live-preview__skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.live-preview__skeleton .pulse-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-style: italic;
+  animation: pulse-op 1.5s ease-in-out infinite;
+}
+@keyframes pulse-op {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.live-preview__iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.live-preview__iframe.is-loaded {
+  opacity: 1;
+}
+
+.live-preview__fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper2);
+}
+.live-preview__fallback-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.live-preview__error-msg {
+  text-align: center;
+  padding: 2rem;
+}

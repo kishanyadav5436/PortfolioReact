@@ -8,6 +8,7 @@
 
 import { useState, useCallback, useRef, useId, useEffect } from 'react';
 import Filmstrip from './Filmstrip';
+import LivePreview from './LivePreview';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export default function Fieldnote({ project, index }) {
@@ -208,6 +209,11 @@ export default function Fieldnote({ project, index }) {
           </header>
 
           <div className="fieldnote__body" style={{ paddingTop: '1rem' }}>
+            {/* Live Preview (only renders if project.liveUrl exists) */}
+            {project.liveUrl && (
+              <LivePreview liveUrl={project.liveUrl} assetUrl={null} />
+            )}
+
             {/* Dated journal entries */}
             {entries.map((entry, i) => (
               <div key={i} className="fieldnote__entry">

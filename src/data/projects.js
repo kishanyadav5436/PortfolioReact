@@ -209,6 +209,7 @@ export const projects = [
       'Neighborhood service marketplace connecting local households with verified service professionals. Booking management, role-based dashboards, reviews. Built as a 4-member hackathon project.',
     repo: 'https://github.com/kishanyadav5436/Servify',
     live: null,
+    liveUrl: 'https://example.com/servicehub',
     stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Tailwind CSS'],
     entries: [
       {
@@ -246,6 +247,7 @@ export const projects = [
       'Full-featured content platform: rich-text editor, JWT auth, likes / bookmarks / comments, tag filtering, real-time search, and a dark glassmorphism UI.',
     repo: 'https://github.com/kishanyadav5436/BlogSphere',
     live: null,
+    liveUrl: 'https://example.com/blogsphere',
     stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Rich-text Editor'],
     entries: [
       {
@@ -279,6 +281,7 @@ export const projects = [
       'Full-stack e-commerce storefront with product catalog, filtering, persistent cart, checkout flow, and order management. REST API backend with MongoDB.',
     repo: 'https://github.com/kishanyadav5436/ecommerce-store',
     live: null,
+    liveUrl: 'https://example.com/ecommerce',
     stack: ['Node.js', 'Express.js', 'MongoDB', 'REST API', 'JavaScript', 'HTML5', 'CSS3'],
     entries: [
       {
