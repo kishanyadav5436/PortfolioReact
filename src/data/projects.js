@@ -209,7 +209,7 @@ export const projects = [
       'Neighborhood service marketplace connecting local households with verified service professionals. Booking management, role-based dashboards, reviews. Built as a 4-member hackathon project.',
     repo: 'https://github.com/kishanyadav5436/Servify',
     live: null,
-    liveUrl: 'https://example.com/servicehub',
+    liveUrl: 'https://tshub-kishanyadav5436s-projects.vercel.app/',
     stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Tailwind CSS'],
     entries: [
       {
@@ -245,9 +245,9 @@ export const projects = [
     date: '2026-03-01',
     summary:
       'Full-featured content platform: rich-text editor, JWT auth, likes / bookmarks / comments, tag filtering, real-time search, and a dark glassmorphism UI.',
-    repo: 'https://github.com/kishanyadav5436/BlogSphere',
+    repo: 'https://github.com/kishanyadav5436/blogsphere-app',
     live: null,
-    liveUrl: 'https://example.com/blogsphere',
+    liveUrl: 'https://blogsphere-app-sigma.vercel.app',
     stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Rich-text Editor'],
     entries: [
       {
@@ -279,9 +279,9 @@ export const projects = [
     date: '2025-12-10',
     summary:
       'Full-stack e-commerce storefront with product catalog, filtering, persistent cart, checkout flow, and order management. REST API backend with MongoDB.',
-    repo: 'https://github.com/kishanyadav5436/ecommerce-store',
+    repo: 'https://github.com/kishanyadav5436/CodeAlpha_Simple_E-commerce-Store',
     live: null,
-    liveUrl: 'https://example.com/ecommerce',
+    liveUrl: 'https://code-alpha-simple-e-commerce-store-drab.vercel.app',
     stack: ['Node.js', 'Express.js', 'MongoDB', 'REST API', 'JavaScript', 'HTML5', 'CSS3'],
     entries: [
       {
