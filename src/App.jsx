@@ -1,56 +1,54 @@
-import React, { lazy, Suspense } from 'react';
-import CustomCursor from './components/CustomCursor';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+/**
+ * App.jsx -- Fieldnotes Portfolio
+ * Kishan Kumar · Full-Stack Developer · BBDU, Lucknow
+ *
+ * Layout order:
+ *   IndexNav (side tabs / mobile bottom bar)
+ *   DeskHero (bio + tech arsenal + project cards)
+ *   fieldnotes-section:
+ *     Experience (internship timeline)
+ *     Fieldnote × 4 (one per project)
+ *     Achievements (certifications + licenses)
+ *   StickyNote (contact + GitHub summary table)
+ */
 
-// Lazy-loaded Below-the-Fold Sections for Performance & Bundle Splitting
-const Projects = lazy(() => import('./components/Projects'));
-const About = lazy(() => import('./components/About'));
-const Services = lazy(() => import('./components/Services'));
-const Experience = lazy(() => import('./components/Experience'));
-const Skills = lazy(() => import('./components/Skills'));
-const Certifications = lazy(() => import('./components/Certifications'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
-
-// Suspense Fallback Skeleton Loader
-function SectionLoader() {
-  return (
-    <div className="py-20 text-center font-code text-xs text-cyan-400 flex items-center justify-center gap-2">
-      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-      <span>Loading module resources...</span>
-    </div>
-  );
-}
+import './index.css';
+import IndexNav from './components/IndexNav';
+import DeskHero from './components/DeskHero';
+import Experience from './components/Experience';
+import Fieldnote from './components/Fieldnote';
+import Achievements from './components/Achievements';
+import StickyNote from './components/StickyNote';
+import { projects } from './data/projects';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#090d16] text-[#e2e8f0] relative overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Custom Terminal Crosshair Cursor */}
-      <CustomCursor />
+    <>
+      <IndexNav />
 
-      {/* Navigation */}
-      <Navbar />
+      <main id="main-content" tabIndex="-1" style={{ outline: 'none' }}>
+        {/* Above-the-fold desk */}
+        <DeskHero />
 
-      {/* Main Content Sections */}
-      <main id="main-content" tabIndex="-1" className="outline-none">
-        <Hero />
+        {/* Full fieldnotes journal */}
+        <div className="fieldnotes-section">
+          <div className="section-label">fieldnotes ↓</div>
 
-        <Suspense fallback={<SectionLoader />}>
-          <Projects />
-          <About />
-          <Services />
+          {/* Experience: internships */}
           <Experience />
-          <Skills />
-          <Certifications />
-          <Contact />
-        </Suspense>
-      </main>
 
-      {/* Footer */}
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
-    </div>
+          {/* Project fieldnotes */}
+          {projects.map((project, i) => (
+            <Fieldnote key={project.id} project={project} index={i} />
+          ))}
+
+          {/* Certifications & achievements */}
+          <Achievements />
+        </div>
+
+        {/* Contact + GitHub summary */}
+        <StickyNote />
+      </main>
+    </>
   );
 }

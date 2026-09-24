@@ -1,107 +1,957 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
-@import "tailwindcss";
+/* ============================================================
+   FIELDNOTES — Design System
+   A living research journal / lab notebook portfolio
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  --paper: #EDE6D6;
+  --paper-dark: #E0D8C4;
+  --paper-light: #F5F0E8;
+  --ink: #211D17;
+  --ink-light: #3D3830;
+  --pen: #B23A2E;
+  --hi: #E8C468;
+  --hi-bg: rgba(232, 196, 104, 0.28);
+  --muted: #8A8272;
+  --muted-light: #A8A090;
+  --rule: rgba(33, 29, 23, 0.12);
+  --rule-dark: rgba(33, 29, 23, 0.22);
+  --shadow-card: 3px 5px 18px rgba(33, 29, 23, 0.15), 0 1px 3px rgba(33, 29, 23, 0.08);
+  --shadow-lift: 6px 12px 32px rgba(33, 29, 23, 0.22), 0 2px 6px rgba(33, 29, 23, 0.10);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --radius-card: 2px;
+  --radius-note: 4px;
+
+  --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --z-nav: 100;
+  --z-card-hover: 20;
+  --z-overlay: 200;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
-@layer base {
-  :root {
-    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+body {
+  font-family: var(--font-mono);
+  background-color: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+  /* Subtle lined-paper texture via gradient */
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(33, 29, 23, 0.06) 27px,
+      rgba(33, 29, 23, 0.06) 28px
+    );
+  background-attachment: local;
+  min-height: 100vh;
+}
+
+/* Reduce motion: disable all transforms & springs */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-
-  body {
-    font-family: var(--font-sans);
-    background-color: #090d16;
-    color: #e2e8f0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-  }
-
-  .font-code {
-    font-family: var(--font-mono);
-  }
-
-  /* Global Keyboard Focus Outline for Accessibility */
-  *:focus-visible {
-    outline: 2px solid #22d3ee !important;
-    outline-offset: 2px !important;
-  }
 }
 
-/* Custom Terminal Grid Background */
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-.bg-dot-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
+h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+h4 { font-size: 1.1rem; }
+
+p {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--ink-light);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+a {
+  color: var(--pen);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s var(--transition-ease);
+}
+a:hover { opacity: 0.75; }
+
+/* --- Highlight utility --- */
+.hi {
+  background: var(--hi-bg);
+  padding: 0 3px;
+  border-radius: 2px;
 }
 
-::-webkit-scrollbar-track {
-  background: #090d16;
+/* --- Annotation / marginal note --- */
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--pen);
+  font-style: italic;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
-  border: 2px solid #090d16;
+/* --- Ruled divider --- */
+.ruled {
+  border: none;
+  border-top: 1px solid var(--rule-dark);
+  margin: 2rem 0;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
+/* --- Focus ring (pen-color) --- */
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-/* Scanline effect for terminal header */
-.scanline {
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0) 50%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.3)
-  );
-  background-size: 100% 4px;
+/* --- Scrollbar styling --- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--paper-dark); }
+::-webkit-scrollbar-thumb { background: var(--muted-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* --- Layout shell --- */
+.app-shell {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* Terminal Glass Glow */
-.code-box-shadow {
-  box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.15), 0 0 15px -5px rgba(16, 185, 129, 0.1);
-}
-
-.code-box-emerald {
-  box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.2);
-}
-
-/* Glassmorphism terminal cards */
-.terminal-card {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.terminal-card:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-}
-
-/* Custom selection */
+/* --- Selection --- */
 ::selection {
-  background: rgba(6, 182, 212, 0.25);
-  color: #38bdf8;
+  background: var(--hi-bg);
+  color: var(--ink);
 }
+
+/* ============================================================
+   IndexNav — Side-tab section index
+   ============================================================ */
+.index-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 52px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: var(--z-nav);
+  padding: 1rem 0;
+  background: var(--paper-dark);
+  border-right: 1px solid var(--rule-dark);
+}
+
+.index-nav__tab {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 10px 6px;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: color 0.2s var(--transition-ease), background 0.2s var(--transition-ease);
+  text-transform: lowercase;
+  position: relative;
+  white-space: nowrap;
+}
+
+.index-nav__tab::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background 0.2s var(--transition-ease);
+}
+
+.index-nav__tab:hover,
+.index-nav__tab.active {
+  color: var(--pen);
+}
+
+.index-nav__tab.active::before {
+  background: var(--pen);
+}
+
+.index-nav__tab:hover::before {
+  background: rgba(178, 58, 46, 0.4);
+}
+
+/* ============================================================
+   DeskHero — Scattered pinned project cards area
+   ============================================================ */
+.desk-hero {
+  margin-left: 52px;
+  min-height: 100vh;
+  padding: 3rem 2.5rem 2rem;
+  position: relative;
+}
+
+.desk-hero__header {
+  max-width: 640px;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.desk-hero__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.desk-hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+
+.desk-hero__name em {
+  font-style: italic;
+  color: var(--pen);
+}
+
+.desk-hero__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+  max-width: 420px;
+  line-height: 1.7;
+  border-left: 2px solid var(--rule-dark);
+  padding-left: 1rem;
+  margin-top: 1rem;
+}
+
+.desk-hero__cards-area {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+/* ============================================================
+   ProjectCard — Rotated card, unfolds into case study
+   ============================================================ */
+.project-card {
+  background: var(--paper-light);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    box-shadow 0.25s var(--transition-ease),
+    transform 0.35s var(--transition-spring);
+  position: relative;
+  width: 240px;
+  user-select: none;
+  /* rotation applied via inline style */
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-lift);
+  z-index: var(--z-card-hover);
+}
+
+.project-card:hover .project-card__inner {
+  transform: translateY(-3px);
+}
+
+/* Pin decoration */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--pen);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(178, 58, 46, 0.4);
+  z-index: 1;
+}
+
+.project-card__inner {
+  transition: transform 0.35s var(--transition-spring);
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.project-card__week {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--pen);
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.project-card__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.project-card__role {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.project-card__tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  border: 1px solid var(--rule-dark);
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--paper-dark);
+}
+
+.project-card__cta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--pen);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.5rem;
+}
+
+.project-card__cta::after {
+  content: '→';
+  transition: transform 0.2s var(--transition-ease);
+}
+
+.project-card:hover .project-card__cta::after {
+  transform: translateX(4px);
+}
+
+/* Expanded state: unfold */
+.project-card.expanded {
+  width: 100%;
+  max-width: 720px;
+  cursor: default;
+  transform: rotate(0deg) !important;
+  z-index: 50;
+  box-shadow: var(--shadow-lift);
+}
+
+.project-card.expanded .project-card__inner {
+  transform: none;
+}
+
+.project-card__expand-body {
+  overflow: hidden;
+  transform-origin: top center;
+  animation: unfold 0.4s var(--transition-spring) forwards;
+}
+
+.project-card__expand-body.collapsing {
+  animation: fold 0.3s var(--transition-ease) forwards;
+}
+
+@keyframes unfold {
+  from { opacity: 0; transform: scaleY(0.6); max-height: 0; }
+  to   { opacity: 1; transform: scaleY(1);   max-height: 2000px; }
+}
+
+@keyframes fold {
+  from { opacity: 1; transform: scaleY(1);   max-height: 2000px; }
+  to   { opacity: 0; transform: scaleY(0.6); max-height: 0; }
+}
+
+.project-card__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--rule-dark);
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.project-card__close:hover {
+  color: var(--pen);
+  border-color: var(--pen);
+}
+
+/* ============================================================
+   Fieldnote — One dated notebook-page section per project
+   ============================================================ */
+.fieldnotes-section {
+  margin-left: 52px;
+  padding: 0 2.5rem;
+}
+
+.fieldnote {
+  border-top: 1px solid var(--rule-dark);
+  padding: 3.5rem 0 2.5rem;
+  position: relative;
+  scroll-margin-top: 2rem;
+}
+
+.fieldnote__header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.fieldnote__date-stamp {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.fieldnote__project-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--pen);
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.fieldnote__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--ink);
+  font-style: italic;
+  max-width: 580px;
+}
+
+.fieldnote__meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.fieldnote__meta-label {
+  color: var(--pen);
+  font-style: italic;
+}
+
+.fieldnote__body {
+  max-width: 680px;
+}
+
+.fieldnote__entry {
+  margin-bottom: 1.75rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--rule);
+  position: relative;
+}
+
+.fieldnote__entry-week {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--pen);
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.fieldnote__entry-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-light);
+  line-height: 1.8;
+}
+
+.fieldnote__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 1.5rem;
+}
+
+.fieldnote__stack-item {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  border: 1px solid var(--rule-dark);
+  padding: 3px 8px;
+  border-radius: 2px;
+  background: var(--paper-dark);
+}
+
+/* ============================================================
+   Filmstrip — Horizontal drag-scroll of sketch→final images
+   ============================================================ */
+.filmstrip {
+  margin: 2rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.filmstrip__label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filmstrip__track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  cursor: grab;
+  padding: 8px 4px 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-light) var(--paper-dark);
+}
+
+.filmstrip__track:active {
+  cursor: grabbing;
+}
+
+.filmstrip__frame {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 200px;
+  background: var(--paper-dark);
+  border: 1px solid var(--rule-dark);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.filmstrip__frame img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s var(--transition-ease);
+}
+
+.filmstrip__frame:hover img {
+  transform: scale(1.04);
+}
+
+.filmstrip__frame-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  padding: 5px 8px;
+  font-style: italic;
+}
+
+.filmstrip__frame-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  background: var(--pen);
+  color: var(--paper-light);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   StickyNote — Footer contact block
+   ============================================================ */
+.sticky-note-section {
+  margin-left: 52px;
+  padding: 3rem 2.5rem 4rem;
+  border-top: 1px solid var(--rule-dark);
+  position: relative;
+}
+
+.sticky-note {
+  background: var(--hi);
+  padding: 2rem 2.25rem 2.5rem;
+  max-width: 480px;
+  position: relative;
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1.2deg);
+  border-radius: 1px;
+}
+
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: rgba(33, 29, 23, 0.12);
+}
+
+.sticky-note__heading {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+
+.sticky-note__body {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-light);
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.sticky-note__links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sticky-note__link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--pen);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px dashed rgba(178, 58, 46, 0.3);
+  padding-bottom: 5px;
+  transition: gap 0.2s var(--transition-ease);
+}
+
+.sticky-note__link:hover {
+  gap: 14px;
+  opacity: 1;
+}
+
+.sticky-note__link-arrow {
+  font-size: 0.7rem;
+}
+
+.sticky-footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-top: 3rem;
+  font-style: italic;
+}
+
+/* ============================================================
+   Entrance animations — useSettleIn
+   ============================================================ */
+.settle-hidden {
+  opacity: 0;
+  transform: translateY(16px) rotate(var(--card-rotation, 0deg));
+}
+
+.settle-visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--card-rotation, 0deg));
+  transition:
+    opacity 0.55s var(--transition-ease),
+    transform 0.65s var(--transition-spring);
+}
+
+/* For cards that are expanded, always remove rotation */
+.settle-visible.expanded {
+  transform: rotate(0deg) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle-hidden,
+  .settle-visible {
+    opacity: 1;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Mobile — Responsive collapse
+   ============================================================ */
+@media (max-width: 768px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  /* Side nav becomes bottom bar on mobile */
+  .index-nav {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 48px;
+    flex-direction: row;
+    justify-content: space-around;
+    border-right: none;
+    border-top: 1px solid var(--rule-dark);
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .index-nav__tab {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    padding: 6px 10px;
+    font-size: 0.62rem;
+  }
+
+  .index-nav__tab::before {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    height: 2px;
+  }
+
+  .desk-hero,
+  .fieldnotes-section,
+  .sticky-note-section {
+    margin-left: 0;
+    padding-bottom: 60px; /* space for bottom nav */
+  }
+
+  .desk-hero {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .fieldnotes-section {
+    padding: 0 1.25rem;
+  }
+
+  .sticky-note-section {
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  .desk-hero__cards-area {
+    flex-direction: column;
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .project-card {
+    width: 100%;
+    transform: rotate(0deg) !important;
+  }
+
+  .project-card.expanded {
+    max-width: 100%;
+  }
+
+  .sticky-note {
+    transform: rotate(0deg);
+    max-width: 100%;
+  }
+
+  .fieldnote__header {
+    grid-template-columns: 1fr;
+  }
+
+  .fieldnote__meta {
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   Misc utility
+   ============================================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+/* ============================================================
+   Margin annotation — red ink, handwritten feel
+   ============================================================ */
+.margin-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--pen);
+  font-style: italic;
+  padding: 3px 8px;
+  border-left: 2px solid var(--pen);
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
+/* ============================================================
+   Red-underline annotation link style
+   ============================================================ */
+.annotation-link {
+  color: var(--pen);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* ============================================================
+   Highlighted text span
+   ============================================================ */
+mark {
+  background: var(--hi-bg);
+  color: inherit;
+  padding: 0 3px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   IndexNav logo mark at top
+   ============================================================ */
+.index-nav__mark {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--pen);
+  font-style: italic;
+  writing-mode: vertical-rl;
+  margin-bottom: auto;
+  padding: 12px 0 6px;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .index-nav__mark {
+    writing-mode: horizontal-tb;
+    margin-bottom: 0;
+    margin-right: auto;
+    padding: 0 12px 0 6px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ============================================================
+   Fieldnote entry hover — subtle left-bar accent
+   ============================================================ */
+.fieldnote__entry {
+  transition: border-left-color 0.2s ease;
+}
+
+.fieldnote__entry:hover {
+  border-left-color: var(--pen);
+}
+
+/* ============================================================
+   Card grid: ensure 3-wide on large screens, collapse gracefully
+   ============================================================ */
+@media (min-width: 1200px) {
+  .desk-hero__cards-area {
+    gap: 2rem;
+  }
+}
+
+/* ============================================================
+   Smooth scroll only if no reduced-motion preference
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================================
+   Page load fade-in for the entire app
+   ============================================================ */
+#root {
+  animation: page-in 0.4s ease both;
+}
+
+@keyframes page-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root {
+    animation: none;
+  }
+}
+

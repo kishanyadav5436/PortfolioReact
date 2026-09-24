@@ -1,76 +1,162 @@
-import React from 'react';
-import { Calendar, MapPin, CheckCircle2, Terminal } from 'lucide-react';
-import { experience } from '../data/portfolioData';
+/**
+ * Experience.jsx
+ * Internship timeline — two roles rendered as fieldnote-style journal entries.
+ * CodeAlpha (May-Jun 2026) and GRAStech (Jun-Aug 2026).
+ */
+
+import { EXPERIENCE } from '../data/projects';
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 relative bg-slate-950/70 border-t border-slate-800">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-code text-xs font-semibold">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>JOURNEY & MILESTONES</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Work Experience & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">Hackathons</span>
-          </h2>
-        </div>
+    <section
+      id="experience"
+      className="fieldnote"
+      style={{ borderTop: '1px solid var(--rule-dark)', padding: '3.5rem 0 2.5rem' }}
+      aria-label="Work experience"
+    >
+      {/* Section header */}
+      <header style={{ marginBottom: '2.5rem' }}>
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.65rem',
+            color: 'var(--pen)',
+            fontStyle: 'italic',
+            display: 'block',
+            marginBottom: '0.3rem',
+          }}
+        >
+          00 / experience
+        </span>
+        <h2
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)',
+            fontWeight: 400,
+            color: 'var(--ink)',
+            fontStyle: 'italic',
+          }}
+        >
+          Where I have worked
+        </h2>
+      </header>
 
-        {/* Vertical Timeline */}
-        <div className="relative border-l-2 border-slate-800 ml-4 sm:ml-8 space-y-12">
-          {experience.map((item, index) => (
-            <div key={index} className="relative pl-6 sm:pl-10 group">
-              
-              {/* Timeline Dot */}
-              <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-900 border-2 border-cyan-400 group-hover:bg-cyan-400 group-hover:scale-125 transition-all duration-200" />
+      {/* Timeline */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '3rem',
+          maxWidth: 720,
+          position: 'relative',
+        }}
+      >
+        {/* Vertical timeline rule */}
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 1,
+            background: 'var(--rule-dark)',
+          }}
+          aria-hidden="true"
+        />
 
-              <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 group-hover:border-cyan-500/30 transition-all duration-300 shadow-xl space-y-4">
-                
-                <div className="flex flex-wrap items-start justify-between gap-2 border-b border-slate-800 pb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                      {item.title}
-                    </h3>
-                    <div className="font-code text-xs text-cyan-300 font-semibold mt-0.5">
-                      {item.company}
-                    </div>
-                  </div>
+        {EXPERIENCE.map((exp, i) => (
+          <article
+            key={exp.id}
+            id={exp.id}
+            style={{ paddingLeft: '1.5rem', position: 'relative' }}
+            aria-label={`${exp.role} at ${exp.company}`}
+          >
+            {/* Timeline dot */}
+            <span
+              style={{
+                position: 'absolute',
+                left: -4,
+                top: 6,
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                background: i === 0 ? 'var(--pen)' : 'var(--muted-light)',
+                border: '1px solid var(--paper-dark)',
+              }}
+              aria-hidden="true"
+            />
 
-                  <div className="flex items-center gap-3 font-code text-xs text-slate-300 font-medium">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                      {item.period}
-                    </span>
-                    <span className="text-slate-600">•</span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                      {item.location}
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-slate-200 text-sm leading-relaxed font-sans">
-                  {item.description}
+            {/* Role + company */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '1rem', alignItems: 'start', marginBottom: '1rem' }}>
+              <div>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.63rem',
+                    color: 'var(--pen)',
+                    fontStyle: 'italic',
+                    display: 'block',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  {exp.period}
+                </span>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.25rem',
+                    fontWeight: 400,
+                    color: 'var(--ink)',
+                    fontStyle: 'italic',
+                    marginBottom: '0.2rem',
+                  }}
+                >
+                  {exp.role}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.72rem',
+                    color: 'var(--muted)',
+                  }}
+                >
+                  {exp.company} &mdash; {exp.location}
                 </p>
-
-                {/* Key Highlights */}
-                <div className="space-y-1.5 pt-2">
-                  {item.highlights.map((h, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-200 font-sans font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span>{h}</span>
-                    </div>
-                  ))}
-                </div>
-
               </div>
 
+              {/* Type badge */}
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.58rem',
+                  color: 'var(--pen)',
+                  border: '1px solid rgba(178,58,46,0.3)',
+                  padding: '2px 8px',
+                  borderRadius: '2px',
+                  whiteSpace: 'nowrap',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                {exp.type}
+              </span>
             </div>
-          ))}
-        </div>
 
+            {/* Journal entries */}
+            {exp.entries.map((entry, j) => (
+              <div key={j} className="fieldnote__entry" style={{ marginBottom: '1.25rem' }}>
+                <span className="fieldnote__entry-week">{entry.week}</span>
+                <p className="fieldnote__entry-text">{entry.text}</p>
+              </div>
+            ))}
+
+            {/* Stack */}
+            <div className="fieldnote__stack" style={{ marginTop: '0.75rem' }}>
+              {exp.stack.map((s) => (
+                <span key={s} className="fieldnote__stack-item">{s}</span>
+              ))}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
