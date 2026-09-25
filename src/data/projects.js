@@ -281,7 +281,7 @@ export const projects = [
       'Neighborhood service marketplace connecting local households with verified service professionals. Booking management, role-based dashboards, reviews. Built as a 4-member hackathon project.',
     repo: 'https://github.com/kishanyadav5436/Servify',
     live: null,
-    liveUrl: 'https://tshub-kishanyadav5436s-projects.vercel.app/',
+    liveUrl: 'https://parth2-0-kishan-kumar.vercel.app/',
     stack: ['React', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'JWT Auth', 'Tailwind CSS'],
     entries: [
       {
